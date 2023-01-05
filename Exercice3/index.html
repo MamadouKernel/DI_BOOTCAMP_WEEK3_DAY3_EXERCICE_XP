@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+        #target {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            background: yellow;
+        }
+        #box {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: red;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="target" ondragover="allowDrop(event)" ondrop="drop(event)">
+            <!--
+                L'attribut ondragover définit une fonction JavaScript qui est appelée lorsque l'utilisateur déplace un élément au-dessus d'un autre élément.
+                L'objet Event est passé en tant qu'argument à la fonction, ce qui permet d'accéder aux détails de l'événement de drag & drop. Dans ce cas,
+                nous appelons la fonction allowDrop(event), qui utilise la méthode preventDefault() de l'objet Event pour empêcher le navigateur de suivre
+                son comportement par défaut, qui est de ne pas autoriser le dépôt de l'élément.
+
+                L'attribut ondrop définit une fonction JavaScript qui est appelée lorsque l'utilisateur dépose un élément sur un autre élément.
+                L'objet Event est à nouveau passé en tant qu'argument à la fonction, ce qui permet d'accéder aux détails de l'événement de drag & drop.
+                Dans ce cas, nous appelons la fonction drop(event), qui utilise l'objet DataTransfer pour récupérer les données transférées lors du dépôt
+                de l'élément et utilise la méthode appendChild() de l'objet Node pour ajouter l'élément que nous faisions glisser à l'élément cible.
+            -->
+        </div>
+        <br>
+        <div id="box" draggable="true" ondragstart="drag(event)"> 
+            <!--
+                L'attribut draggable définit si un élément peut être déplacé en le faisant glisser.
+                Si sa valeur est définie sur "true", l'élément peut être déplacé en le faisant glisser.
+            
+                Si sa valeur est définie sur "false" (ce qui est la valeur par défaut), l'élément ne peut pas être déplacé.
+                L'attribut ondragstart définit une fonction JavaScript qui est appelée lorsque l'utilisateur commence à faire glisser l'élément.
+                L'objet Event est passé en tant qu'argument à la fonction, ce qui permet d'accéder aux détails de l'événement de drag & drop.
+                Dans ce cas, nous appelons la fonction drag(event), qui utilise l'objet DataTransfer pour définir les données à transférer lors du dépôt de l'élément.
+            -->
+        </div>
+
+
+        <script>
+            /* La fonction allowDrop(ev) est appelée lorsque vous essayez de faire glisser un élément au-dessus d'un élément cible.
+            Elle utilise la méthode preventDefault() de l'objet Event pour empêcher le navigateur de suivre son comportement par défaut,
+            qui est de ne pas autoriser le dépôt de l'élément.
+
+            La fonction drag(ev) est appelée lorsque vous commencez à faire glisser un élément.
+            Elle utilise la méthode setData() de l'objet DataTransfer pour définir les données à transférer lors du dépôt de l'élément.
+            Dans ce cas, nous définissons les données comme étant l'ID de l'élément que nous faisons glisser.
+
+            La fonction drop(ev) est appelée lorsque vous déposez un élément sur un élément cible.
+            Elle utilise à nouveau la méthode preventDefault() pour empêcher le navigateur de suivre son comportement par
+            défaut et utilise la méthode getData() de l'objet DataTransfer pour récupérer les données transférées lors du dépôt de l'élément.
+            Ensuite, elle utilise la méthode appendChild() de l'objet Node pour ajouter l'élément que nous faisions glisser à l'élément cible.*/
+
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+            
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+            
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                ev.target.appendChild(document.getElementById(data));
+            }
+            
+
+
+
+
+
+            
+        </script>
+    </body>
+    </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+        p {
+            background: yellow;
+            color: red;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <button id="clear">Clear Interval</button>
+
+        <script>
+            
+            //Premiere partie
+            setTimeout(function hello(){
+                alert('Hello World')
+            },2000)
+
+            //Deuxieme partie
+
+           /* setTimeout(function() {
+                const container = document.getElementById('container');
+                const p = document.createElement('p');
+                p.textContent = 'Hello, World!';
+                container.appendChild(p);
+            }, 2000);*/
+
+            //Troisieme parties
+
+            //1,2,3
+
+            /**
+            *     Il déclare une variable interval, qui sera utilisée pour stocker l'objet d'intervalle créé par setInterval.
+    Il récupère le div ayant l'identifiant container et le bouton ayant l'identifiant clear dans le DOM et les stocke respectivement dans les variables container et button.
+    Il définit une fonction addParagraph qui ajoute un paragraphe "Hello, World!" au conteneur.
+    Il utilise setInterval pour appeler la fonction addParagraph toutes les 2 secondes et stocke l'objet d'intervalle créé dans la variable interval.
+    Il ajoute un écouteur d'événement click au bouton qui appelle la fonction clearInterval en lui passant l'objet d'intervalle stocké dans interval lorsque l'utilisateur clique sur le bouton. Cela efface l'intervalle et arrête l'ajout de paragraphes.
+            *
+            */
+
+            let interval;
+
+            const container = document.getElementById('container');
+            const button = document.getElementById('clear');
+            
+            function addParagraph() {
+                const p = document.createElement('p');
+                p.textContent = 'Hello, World!';
+                container.appendChild(p);
+            }
+            
+            interval = setInterval(addParagraph, 2000);
+            
+            button.addEventListener('click', function() {
+                clearInterval(interval);
+            });
+            
+
+            // 4. Au lieu de cliquer sur le bouton, l'intervalle sera effacé (c'est-à-dire clearInterval) dès qu'il y aura 5 paragraphes à l'intérieur du <div id="container">.
+
+            /**
+                définit une fonction addParagraph qui ajoute un paragraphe "Hello, World!" au conteneur. Si le conteneur a déjà 5 enfants (paragraphes), la fonction appelle clearInterval pour effacer l'intervalle et arrêter l'ajout de paragraphes.
+                Il utilise setInterval pour appeler la fonction addParagraph toutes les 2 secondes et stocke l'objet d'intervalle créé dans la variable interval.
+            */
+            function addParagraph() {
+                if (container.childElementCount === 5) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const p = document.createElement('p');
+                p.textContent = 'Hello, World!';
+                container.appendChild(p);
+            }
+
+            interval = setInterval(addParagraph, 2000);
+
+
+
+
+
+        </script>
+    </body>
+    </html>

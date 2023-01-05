@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+        #container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background: yellow;
+        }
+        #animate {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: red;
+        }
+        </style>
+    </head>
+    <body>
+        <p><button onclick="myMove()">Click Me</button></p>
+        <div id="container">
+            <div id="animate"></div>
+        </div>
+
+        <script>
+            //recuperation de nos id dans les differentes balises
+            const animateDiv = document.getElementById('animate');
+            const containerDiv = document.getElementById('container');
+            const button = document.getElementById('button');
+
+
+            //déclaration une variable interval qui sera utilisée pour stocker l'objet d'intervalle créé par setInterval.
+
+            let interval;
+
+            /**
+                déclare une variable left qui stocke la distance en pixels du bord gauche du div animate
+                par rapport au bord gauche de son conteneur. Elle est initialisée à 0.
+    
+            */
+            let left = 0;
+
+
+            /**
+                définition d'une fonction move qui incrémente la valeur de left de 1px et
+                définit la propriété CSS left du div animate en fonction de cette valeur.
+            
+            */
+
+            function move() {
+                left += 1;
+                animateDiv.style.left = `${left}px`;
+
+                /**
+                    Si le bord gauche du div animate atteint la fin du div container,
+                    l'intervalle est effacé en appelant la fonction clearInterval.
+                */
+
+                if (left >= containerDiv.offsetWidth - animateDiv.offsetWidth) {
+                    clearInterval(interval);
+                }
+            }
+
+            //définition une fonction myMove qui crée un intervalle
+            function myMove() {
+                interval = setInterval(move, 1000);
+            }
+
+
+
+        </script>
+    </body>
+    </html>
